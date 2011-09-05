@@ -3,7 +3,7 @@
 #include <time.h>
 #include <conio.h>
 
-#define PLUS1 2
+#define PLUS1 2				// Tuning Parameters
 #define PLUS2 4
 #define OUTPUT 219
 
@@ -70,33 +70,8 @@ int main () {
 
 
 
-		
-		sum = cell [!switcher] [78] + cell [!switcher] [79] + cell [!switcher] [1] + cell [!switcher] [2];
-
-		if (sum == PLUS1 || sum == PLUS2) {
-			cell [switcher] [0] = 1;
-			printf ("%c", OUTPUT);
-		}
-		else {
-			cell [switcher] [0] = 0;
-			printf (" ");
-		}
-
-
-		sum = cell [!switcher] [79] + cell [!switcher] [0] + cell [!switcher] [2] + cell [!switcher] [3];
-
-		if (sum == PLUS1 || sum == PLUS2) {
-			cell [switcher] [1] = 1;
-			printf ("%c", OUTPUT);
-		}
-		else {
-			cell [switcher] [1] = 0;
-			printf (" ");
-		}		
-		
-
-		for (i = 2; i < 78; ++i) {
-			sum = cell [!switcher] [i-2] + cell [!switcher] [i-1] + cell [!switcher] [i+1] + cell [!switcher] [i+2];
+		for (i = 0; i < 80; ++i) {
+			sum = cell [!switcher] [(i-2) % 80] + cell [!switcher] [(i-1) % 80] + cell [!switcher] [(i+1) % 80] + cell [!switcher] [(i+2) % 80];
 
 			if (sum == PLUS1 || sum == PLUS2) {
 				cell [switcher] [i] = 1;
@@ -109,44 +84,20 @@ int main () {
 		}
 
 
-		sum = cell [!switcher] [76] + cell [!switcher] [77] + cell [!switcher] [79] + cell [!switcher] [0];
+		
 
-		if (sum == PLUS1 || sum == PLUS2) {
-			cell [switcher] [78] = 1;
-			printf ("%c", OUTPUT);
-		}
-		else {
-			cell [switcher] [78] = 0;
-			printf (" ");
-		}
-
-		sum = cell [!switcher] [77] + cell [!switcher] [78] + cell [!switcher] [70] + cell [!switcher] [1];
-
-		if (sum == PLUS1 || sum == PLUS2) {
-			cell [switcher] [79] = 1;
-			printf ("%c", OUTPUT);
-		}
-		else {
-			cell [switcher] [79] = 0;
-			printf (" ");
-		}
-
-
-
-
-
-		input = '´';
-		if (_kbhit()) 
+		if (_kbhit()) {
 			input = _getch ();
 
-		if (input == ' ') 
-			_getch ();
+			if (input == ' ') 
+				_getch ();
 
-		if (input == 27)
-			break;
+			else if (input == 27)
+				break;
 
-		if (input == '\r')
-			goto start;
+			else if (input == '\r')
+				goto start;
+		}
 	}
 
 	_getch ();
